@@ -1,0 +1,177 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plantilla de Administrador</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="min-h-screen flex flex-col">
+        <!-- Header -->
+        <header class="bg-blue-600 text-white p-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Panel de Administración</h1>
+            <nav>
+                <a href="http://127.0.0.1:5000/login" class="px-4 py-2 hover:bg-blue-700 rounded">Login</a>
+                <a href="http://127.0.0.1:5000" class="px-4 py-2 hover:bg-blue-700 rounded">Registro</a>
+                <a href="#dashboard" class="px-4 py-2 hover:bg-blue-700 rounded">Dashboard</a>
+                <a href="#estadisticas" class="px-4 py-2 hover:bg-blue-700 rounded">Estadísticas</a>
+                <a href="http://127.0.0.1:5000/reserva">reservas</a>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-grow container mx-auto p-4">
+            <!-- Login Section -->
+
+            <!-- Registro Section -->
+            
+
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="my-8">
+                <h2 class="text-2xl font-bold mb-4">Dashboard</h2>
+                <div class="bg-white p-6 rounded shadow-md">
+                    <h3 class="text-xl font-bold mb-4">Lista de Usuarios</h3>
+                    <table class="min-w-full bg-white">
+                        <thead>
+                            <tr>
+                                <th class="py-2 px-4 border-b">ID</th>
+                                <th class="py-2 px-4 border-b">Nombre</th>
+                                <th class="py-2 px-4 border-b">Telefono</th>
+                                <th class="py-2 px-4 border-b">correo</th>
+                                <th class="py-2 px-4 border-b">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for contacto in contactos %}
+                            <tr>
+                                <td class="py-2 px-4 border-b" >{{ contacto[0] }}</td>
+                                <td class="py-2 px-4 border-b" >{{ contacto[1] }}</td>
+                                <td class="py-2 px-4 border-b" >{{ contacto[2] }}</td>
+                                <td class="py-2 px-4 border-b" >{{ contacto[3] }}</td>
+                                <td class="py-2 px-4 border-b" >
+                                    <button class="bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600"><a href="/edit/{{contacto.0}}">Editar</a> </button>
+                                    <button class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"><a href="/delete/{{contacto.0}}">Eliminar</a> </button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Estadísticas Section -->
+            <section id="estadisticas" class="my-8">
+                <h2 class="text-2xl font-bold mb-4">Estadísticas</h2>
+                <div class="bg-white p-6 rounded shadow-md">
+                    <h3 class="text-xl font-bold mb-4">Usuarios Registrados</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-black text-white p-4 rounded">
+                            <h4 class="text-lg font-bold">Enero 2023</h4>
+                            <p>Usuarios Registrados: 120</p>
+                        </div>
+                        <div class="bg-orange-500 text-white p-4 rounded">
+                            <h4 class="text-lg font-bold">Febrero 2023</h4>
+                            <p>Usuarios Registrados: 150</p>
+                        </div>
+                        <div class="bg-black text-white p-4 rounded">
+                            <h4 class="text-lg font-bold">Marzo 2023</h4>
+                            <p>Usuarios Registrados: 130</p>
+                        </div>
+                        <div class="bg-orange-500 text-white p-4 rounded">
+                            <h4 class="text-lg font-bold">Abril 2023</h4>
+                            <p>Usuarios Registrados: 170</p>
+                        </div>
+                        <div class="bg-black text-white p-4 rounded">
+                            <h4 class="text-lg font-bold">Mayo 2023</h4>
+                            <p>Usuarios Registrados: 160</p>
+                        </div>
+                        <div class="bg-orange-500 text-white p-4 rounded">
+                            <h4 class="text-lg font-bold">Junio 2023</h4>
+                            <p>Usuarios Registrados: 180</p>
+                        </div>
+                        <div class="bg-black text-white p-4 rounded">
+                            <h4 class="text-lg font-bold">Julio 2023</h4>
+                            <p>Usuarios Registrados: 
+            </section>
+
+            <script>
+                // Función para confirmar la eliminación de un usuario
+                function confirmarEliminacion(id) {
+                    // Muestra una ventana de confirmación
+                    const confirmacion = confirm("¿Estás seguro de que deseas eliminar a este usuario?");
+                    
+                    if (confirmacion) {
+                        // Si el usuario confirma, puedes realizar alguna acción, por ejemplo, redirigir o hacer una llamada a la API para eliminar
+                        alert("Usuario eliminado con éxito.");
+                        // Aquí iría el código para eliminar el usuario
+                    } else {
+                        alert("La eliminación ha sido cancelada.");
+                    }
+                }
+            
+                // Función para mostrar un mensaje de carga
+                function mostrarCarga() {
+                    // Crea un contenedor de carga que se mostrará en pantalla
+                    const carga = document.createElement('div');
+                    carga.className = 'carga'; // Clase CSS para el contenedor de carga
+                    carga.innerHTML = '<div class="spinner"></div><p>Cargando...</p>';
+                    document.body.appendChild(carga);
+                }
+            
+                // Función para ocultar el mensaje de carga
+                function ocultarCarga() {
+                    const carga = document.querySelector('.carga');
+                    if (carga) {
+                        carga.remove(); // Elimina el contenedor de carga
+                    }
+                }
+            
+                // Función para mostrar una alerta simple
+                function mostrarAlerta(mensaje) {
+                    alert(mensaje);
+                }
+            </script>
+            
+            <style>
+                /* Estilos para el mensaje de carga */
+                .carga {
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    padding: 20px;
+                    background-color: rgba(0, 0, 0, 0.5);
+                    color: white;
+                    border-radius: 8px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+            
+                /* Estilos del spinner de carga */
+                .spinner {
+                    border: 4px solid #f3f3f3;
+                    border-top: 4px solid #3498db;
+                    border-radius: 50%;
+                    width: 30px;
+                    height: 30px;
+                    animation: spin 2s linear infinite;
+                }
+            
+                /* Animación del spinner */
+                @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                }
+            </style>
+            

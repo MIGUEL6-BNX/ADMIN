@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <br>
+    <br>
+    <br>
+    <div style="width: 100px;">
+    <button class="w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"><a href="http://127.0.0.1:5000/consulta">Volver</a></button></div>
+    <div class="container mx-auto p-4">
+        <h1 class="text-3xl font-bold mb-4">Reservation Management</h1>
+
+        <!-- Formulario para agregar usuarios a reservas -->
+        <div class="bg-white p-6 rounded-lg shadow-lg mb-6">
+            <h2 class="text-2xl font-semibold mb-4">Add Existing Users to Reservation Status</h2>
+            <form action="/reserva" method="POST" class="space-y-4">
+                <div>
+                    <label for="usuario" class="block text-sm font-medium text-gray-700">User Name</label>
+                    <select name="usuario" id="usuario" class="mt-1 block w-full p-2 border rounded-md" required>
+                        <option value="">Select a User</option>
+                        {% for contacto in contactos %}
+                        <option value="{{ contacto[1] }}">{{ contacto[1] }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label for="estado" class="block text-sm font-medium text-gray-700">Reservation Status</label>
+                    <select name="estado" id="estado" class="mt-1 block w-full p-2 border rounded-md" required>
+                        <option value="Approved">Approved</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Canceled">Canceled</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full bg-indigo-600 text-white p-2 rounded-md">Add User</button>
+            </form>
+        </div>
+
+        <!-- Tabla para mostrar reservas -->
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+            <h2 class="text-2xl font-semibold mb-4">Reservation Status</h2>
+            <table class="w-full border-collapse">
+                <thead>
+                    <tr>
+                        <th class="border px-4 py-2">User</th>
+                        <th class="border px-4 py-2">Status</th>
+                        <th class="border px-4 py-2">Accion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for res in reservas %}
+                    <tr>
+                        <td class="border px-4 py-2">{{ res[2] }}</td>
+                        <td class="border px-4 py-2">{{ res[1] }}</td>
+                        <td>  <button class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"><a href="/delete2/{{res.2}}">Eliminar</a> </button></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
